@@ -115,6 +115,22 @@ flowchart TB
 
 ---
 
+## 화면 미리보기
+
+<div align="center">
+
+|  |  |
+|---|---|
+| ![전국 요약](docs/screenshots/01_dashboard.png) | ![시군구 코로플레스](docs/screenshots/02_map.png) |
+| **전국 요약** — 조례 199,858 · 위임 421,627 | **시군구 코로플레스** — 250개 폴리곤 |
+| ![공간자기상관](docs/screenshots/07_spatial.png) | ![신경망 유사도](docs/screenshots/06_neural.png) |
+| **공간자기상관** — Moran's I 0.4333 (p=.001) | **신경망 유사도** — 모델 평가 공시 |
+| ![검증 공시](docs/screenshots/10_trust.png) | ![AI 정책분석관](docs/screenshots/15_ai_agent.png) |
+| **검증 공시** — 무엇을 어떤 근거로 확인했는지 | **AI 정책분석관** — 근거와 한계를 함께 답한다 |
+
+</div>
+
+전체 15장은 [docs/screenshots/](docs/screenshots/) 에 있다.
 ## Agent 구조
 
 `자치법규 정책지도.agent` 는 별도 챗봇을 붙인 것이 아니라, 현재 보고 있는 화면의
