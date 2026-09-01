@@ -20,7 +20,7 @@
 bash system/tools_audit_keys.sh
 ```
 
-`0건` 이 아니면 푸시하지 않는다. 이 검사는 사전압축된 `.json.gz` shard 4,953개도
+`0건` 이 아니면 푸시하지 않는다. 이 검사는 사전압축된 `.json.gz` shard 약 4,970개도
 풀어서 본다(`system/tools_audit_gz.py`) — `grep` 이 바이너리로 건너뛰는 구멍을 막기 위해서다.
 
 살균이 필요하면:
