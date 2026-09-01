@@ -57,7 +57,8 @@ TEXT_CM = 17.0        # A4 210mm - 좌우 여백 20mm
 
 # 표 머리글 → 열 폭(cm). 합은 TEXT_CM(17.0). 자동 배분은 재현이 흔들려 쓰지 않는다.
 WIDTHS = {
-    ("기존 수단", "제공하는 것", "한계"): [3.6, 4.0, 9.4],
+    ("기존 수단", "어디까지 제공하나", "어디서 멈추나", "본 과제가 더하는 것"):
+        [3.4, 3.4, 4.4, 5.8],
     ("연번", "데이터명", "데이터 설명", "출처", "무상여부", "확보 실적"):
         [0.9, 2.5, 4.0, 4.2, 1.2, 4.2],
     ("데이터", "인증키·발급", "갱신 주기", "이용 조건"): [3.6, 4.6, 3.4, 5.4],
@@ -78,10 +79,8 @@ WIDTHS = {
 
 # 그림 번호 → (경로 목록, 폭cm). 두 장이면 나란히 배치한다.
 FIGMAP = {
-    "1": ([SHOT / "01_dashboard.png"], 9.8),
-    "2": ([SHOT / "07_spatial.png"], 9.0),
-    "3": ([SHOT / "02_map.png"], 9.4),
-    "4": ([SHOT / "04_gap.png", SHOT / "15_ai_agent.png"], 6.7),
+    "1": ([SHOT / "07_spatial.png"], 9.0),
+    "2": ([SHOT / "02_map.png", SHOT / "15_ai_agent.png"], 6.7),
 }
 
 
@@ -122,8 +121,8 @@ def para(doc, text="", *, size=BODY_PT, font=BODY_FONT, bold=False,
 def chapter(doc, text):
     """장 제목 + 아래 실선. 공식 서식의 번호 박스를 대체한다."""
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(7)
-    p.paragraph_format.space_after = Pt(3)
+    p.paragraph_format.space_before = Pt(5)
+    p.paragraph_format.space_after = Pt(2)
     p.paragraph_format.line_spacing = 1.2
     set_run(p.add_run(text), size=16, font=TABLE_FONT, bold=True)
     pPr = p._element.get_or_add_pPr()
@@ -140,18 +139,18 @@ def heading(doc, text, level):
     """level 1 = □ 대분류, level 2 = ㅇ/◦ 중분류."""
     para(doc, text if level == 1 else " " + text,
          size=BODY_PT, font=TABLE_FONT, bold=True,
-         indent=0.0 if level == 1 else 0.2,
-         space_after=2, line=1.2 if level == 1 else 1.25)
+         indent=0.0 if level == 1 else 0.15,
+         space_after=1, line=1.15 if level == 1 else 1.2)
 
 
 def bullet(doc, text, deep=False):
     para(doc, ("· " if deep else "- ") + text,
-         size=BODY_PT, indent=1.4 if deep else 0.7, space_after=2)
+         size=BODY_PT, indent=0.8 if deep else 0.3, space_after=1)
 
 
 def caption(doc, text):
     para(doc, text, size=SMALL_PT, font=TABLE_FONT,
-         align=WD_ALIGN_PARAGRAPH.CENTER, space_after=3, line=1.15)
+         align=WD_ALIGN_PARAGRAPH.CENTER, space_after=2, line=1.1)
 
 
 def figure(doc, paths, cap, width_cm):
@@ -269,6 +268,7 @@ def add_page_number(section):
 # 원고 파싱
 # --------------------------------------------------------------------------- #
 RE_FIG = re.compile(r"^>\s*_그림\s*([0-9]+)(?:·[0-9]+)?\.\s*(.*?)_\s*$")
+RE_TCAP = re.compile(r"^표\s*[0-9]+\..*$")
 
 
 def parse(md: str):
@@ -303,6 +303,8 @@ def parse(md: str):
                 i += 1
             out.append(("table", rows))
             continue
+        elif RE_TCAP.match(s):
+            out.append(("tcap", s))
         elif s.startswith("- "):
             out.append(("bullet", s[2:].strip(), False))
         elif s.startswith("· "):
@@ -351,6 +353,8 @@ def build() -> int:
             bullet(doc, op[1], op[2])
         elif kind == "table":
             table(doc, op[1])
+        elif kind == "tcap":
+            caption(doc, op[1])
         elif kind == "figure":
             paths, w = FIGMAP.get(op[1], ([], 9.0))
             if not paths:

@@ -405,7 +405,7 @@ function mapSection(d, lisa, geo, regionIndex) {
       }).addTo(map);
       map.fitBounds(layer.getBounds());
       L.control.attribution({ prefix: false })
-        .addAttribution("경계: southkorea-maps 2018 시군구(단순화본)").addTo(map);
+        .addAttribution("경계: 국토교통부 V-World(LT_C_ADSIGG_INFO, 2026-09-01)").addTo(map);
       paint();
     }).catch((e) => {
       mapDiv.remove();

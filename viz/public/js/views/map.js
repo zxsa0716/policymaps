@@ -144,7 +144,7 @@ function initLeaflet() {
   ctx.layer = layer;
   map.fitBounds(layer.getBounds());
   L.control.attribution({ prefix: false })
-    .addAttribution("경계: southkorea-maps 2018 시군구(단순화본) · 코드 변환: kostat_to_bjd.json")
+    .addAttribution("경계: 국토교통부 V-World(LT_C_ADSIGG_INFO, 2026-09-01)")
     .addTo(map);
 }
 
@@ -185,7 +185,8 @@ function fillCategorySelect() {
 /**
  * 폴리곤 sig_cd 에 대응하는 값을 찾는다.
  *
- * 경계 파일(southkorea-maps 2018)은 일반구를 둔 시를 시 단위 feature 로 갖고 있지 않다.
+ * 경계 파일(V-World)은 일반구를 둔 13개 시를 하위 일반구 41개를 병합(dissolve)해
+ * 시 단위 feature 로 갖고 있다. 따라서 기초자치단체 227곳이 전수 매칭된다.
  * 수원시(41110)는 없고 장안구(41111)·권선구(41113)… 만 있다. 제주시(50110)도 행정시라
  * 자치법규 제정권이 없어 shard 의 ordinance_total 이 0 이다.
  * 그대로 두면 수원시 867건이 지도에서 사라지고 0인 일반구가 칠해진다.

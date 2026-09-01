@@ -13,7 +13,9 @@
 
 ## 지도 배경
 
-- 시군구 경계: [southkorea-maps](https://github.com/southkorea/southkorea-maps) 2018 시군구(단순화본)
+- 시군구·시도 경계: **국토교통부 공간정보 오픈플랫폼(브이월드) 데이터 API** — `LT_C_ADSIGG_INFO`(시군구 256) · `LT_C_ADSIDO_INFO`(시도 16), EPSG:4326, 실호출 2026-09-01. V-World 오픈API 이용약관에 따라 출처를 표시한다.
+  - 일반구 41개는 상위 시 13곳으로 병합(dissolve)하여 기초자치단체 227곳을 전수 구성하였다.
+  - [southkorea-maps](https://github.com/southkorea/southkorea-maps) 2018 시군구는 2026-09-01 이전 버전에서 지도 경계로 사용하였고, 현재는 법정동코드 크로스워크 교차검증용으로만 참조한다.
 - 위성 배경(선택 레이어): Esri World Imagery — Esri, Maxar, Earthstar Geographics, GIS User Community
 
 ## Python 의존성
