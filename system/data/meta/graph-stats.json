@@ -1,5 +1,5 @@
 {
-  "as_of_date": "2026-08-21",
+  "as_of_date": "2026-09-01",
   "backend": "networkx",
   "node_counts": {
     "Region": 556,
@@ -15,7 +15,7 @@
     "HAS_ORDINANCE": 199858,
     "DELEGATED_FROM/SUBORDINATE_TO": 307779,
     "CITES(+relations)": 2189,
-    "ADJACENT_TO": 1098,
+    "ADJACENT_TO": 1310,
     "SUCCEEDED_BY": 17,
     "CONTAINS": 529,
     "SIMILAR_TO": 21740,
@@ -32,5 +32,5 @@
     "FUNDED_BY": 183145
   },
   "total_nodes": 250416,
-  "total_edges": 1125036
+  "total_edges": 1125248
 }
