@@ -8,7 +8,8 @@
 # AI 패널(15번)은 클릭이 필요해 별도 하네스가 있어야 한다 — 문서 참조.
 
 $chrome = "C:\Program Files\Google\Chrome\Application\chrome.exe"
-$out    = "F:\policy_maps\docs\screenshots"
+$root   = Split-Path -Parent $PSScriptRoot
+$out    = Join-Path $root "docs\screenshots"
 $base   = "http://127.0.0.1:8820/viz/public/index.html"
 New-Item -ItemType Directory -Force -Path $out | Out-Null
 
